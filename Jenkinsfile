@@ -25,7 +25,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 bat 'docker rm -f webapp_container || ver > nul'
-                bat 'docker run -d -p 8080:8080 --name webapp_container webapp:1.0'
+                bat 'docker run -d -p 9090:9090 --name webapp_container webapp:1.0'
             }
         }
     }
