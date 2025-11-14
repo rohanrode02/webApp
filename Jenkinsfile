@@ -2,28 +2,30 @@ pipeline {
     agent any
 
     stages {
+
         stage('Git Checkout') {
             steps {
-                git 'https://github.com/rohanrode02/webApp.git'
+                git branch: 'main',
+                    url: 'https://github.com/rohanrode02/webApp.git'
             }
         }
 
         stage('Maven Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                bat 'mvn clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-mini-app .'
+                bat 'docker build -t webapp:1.0 .'
             }
         }
 
-        stage('Run Container') {
+        stage('Run Docker Container') {
             steps {
-                sh 'docker rm -f devops-container || true'
-                sh 'docker run -d --name devops-container -p 8080:8080 devops-mini-app'
+                bat 'docker rm -f webapp_container || ver > nul'
+                bat 'docker run -d -p 8080:8080 --name webapp_container webapp:1.0'
             }
         }
     }
