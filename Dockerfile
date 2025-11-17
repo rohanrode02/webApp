@@ -1,6 +1,7 @@
-FROM openjdk:17
+FROM eclipse-temurin:17-jdk
 
-COPY . /app
 WORKDIR /app
 
-CMD ["java", "Main"]
+COPY . /app
+
+CMD ["java", "StudentApp"]
