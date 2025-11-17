@@ -2,32 +2,21 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Git Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                credentialsId: 'github-token-mini',
-                url: 'https://github.com/rohanrode02/webApp.git'
-
+                git branch: 'main', credentialsId: 'github-token-mini', url: 'https://github.com/rohanrode02/webApp.git'
             }
         }
 
-        stage('Compile Java') {
+        stage('Build Docker Image') {
             steps {
-                bat 'javac src/*.java -d output'
-            }
-        }
-
-        stage('Build Docker') {
-            steps {
-                bat 'docker build -t student-app:1.0 .'
+                bat 'docker build -t webapp:1.0 .'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker rm -f student_container || ver > nul'
-                bat 'docker run -d -p 9000:8080 --name student_container student-app:1.0'
+                bat 'docker run -d -p 9000:80 --name webapp webapp:1.0'
             }
         }
     }

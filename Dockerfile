@@ -1,7 +1,2 @@
-FROM eclipse-temurin:17-jdk
-
-WORKDIR /app
-
-COPY . /app
-
-CMD ["java", "StudentApp"]
+FROM nginx:latest
+COPY . /usr/share/nginx/html
