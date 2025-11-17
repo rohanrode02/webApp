@@ -6,7 +6,9 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 git branch: 'main',
+                credentialsId: 'github-token-mini',
                 url: 'https://github.com/rohanrode02/student-app.git'
+
             }
         }
 
@@ -25,7 +27,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 bat 'docker rm -f student_container || ver > nul'
-                bat 'docker run -d -p 8080:8080 --name student_container student-app:1.0'
+                bat 'docker run -d -p 9000:8080 --name student_container student-app:1.0'
             }
         }
     }
