@@ -7,7 +7,7 @@ pipeline {
             steps {
                 git branch: 'main',
                 credentialsId: 'github-token-mini',
-                url: 'https://github.com/rohanrode02/student-app.git'
+                url: 'https://github.com/rohanrode02/webApp.git'
 
             }
         }
