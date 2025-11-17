@@ -1,3 +1,6 @@
-FROM eclipse-temurin:11
-COPY target/devops-mini-project-1.0.0.jar /app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM openjdk:17
+
+COPY . /app
+WORKDIR /app
+
+CMD ["java", "Main"]

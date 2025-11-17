@@ -6,26 +6,26 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/rohanrode02/webApp.git'
+                url: 'https://github.com/rohanrode02/student-app.git'
             }
         }
 
-        stage('Maven Build') {
+        stage('Compile Java') {
             steps {
-                bat 'mvn clean package -DskipTests'
+                bat 'javac src/*.java -d output'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Docker') {
             steps {
-                bat 'docker build -t webapp:1.0 .'
+                bat 'docker build -t student-app:1.0 .'
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Container') {
             steps {
-                bat 'docker rm -f webapp_container || ver > nul'
-                bat 'docker run -d -p 9090:9090 --name webapp_container webapp:1.0'
+                bat 'docker rm -f student_container || ver > nul'
+                bat 'docker run -d -p 8080:8080 --name student_container student-app:1.0'
             }
         }
     }
