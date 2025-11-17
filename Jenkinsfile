@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/rohanrode02/webApp.git', credentialsId: 'github-token-mini'
+                git branch: 'main', url: 'https://github.com/rohanrode02/webApp.git', credentialsId: 'github-token-mini'
             }
         }
 
